@@ -1,0 +1,30 @@
+{
+  "name": "mp3lrc",
+  "version": "0.0.1",
+  "description": "这是一个用于歌词获取以及显示在网页的一个插件，没有任何样式设置，全部依靠你自己手动设置，同时支持滚动时对audio的事件支持",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joney-pinkman/mp3Lrc.git"
+  },
+  "keywords": [
+    "lrc",
+    "audio",
+    "mp3",
+    "html5",
+    "jquery"
+  ],
+  "author": "joney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joney-pinkman/mp3Lrc/issues"
+  },
+  "homepage": "https://github.com/joney-pinkman/mp3Lrc",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-uglify": "^0.9.1"
+  }
+}

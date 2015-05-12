@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-
         .classUl{
             list-style: none;
             width:500px;
@@ -14,7 +13,7 @@
         .classLi{
             display: block;
             height:22px;
-            line-height: 22px;;
+            line-height: 22px;
             white-space: nowrap;
         }
         .classLiActive{
@@ -25,11 +24,9 @@
 </head>
 <body>
     <div id="lrc"></div>
-    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../src/jquery-mousewheel.js"></script>
-    <script src="../src/getParseLrc.js"></script>
-    <script src="../src/constructLrc.js"></script>
-    <script src="../src/lrc.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+    <script src="../build/lrc.js"></script>
     <script>
         $(function(){
             $('#lrc')
