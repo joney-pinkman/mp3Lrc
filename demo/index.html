@@ -33,13 +33,19 @@
     <script>
         $(function(){
             $('#lrc')
-                .on('scrollTime',function(e,time){
-                    console.log(time);
-                })
                 .on('scrollBegin',function(){
-                    console.log('begin');
+                    console.log('scrollBegin')
                 })
                 .on('scrollEnd',function(){
+                    console.log('scrollEnd');
+                })
+                .on('scrollTime',function(e,time){
+                    console.log('scrollTime',time);
+                })
+                .on('begin',function(){
+                    console.log('begin');
+                })
+                .on('end',function(){
                     console.log('end');
                 }).lrc({
                 classUl:'classUl',

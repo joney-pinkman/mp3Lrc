@@ -23,7 +23,9 @@
                 height = $li.height(),
                 lineShowUp = Math.round($ul.height()/height/ 2),
                 scrollTimeout = 0,
-                lineIndex;
+                lineIndex,
+                isScroll = false;
+
             for(var i = 0; i< lineShowUp;i++){
                 $('<li>').addClass(option.classLi).data({'time':0,startTime:0}).prependTo($ul);
                 $('<li>').addClass(option.classLi).data({'time':0,startTime:0}).appendTo($ul);
@@ -42,8 +44,8 @@
                 $lis.eq(index).addClass(option.classLiActive);
 
                 switch(index){
-                    case lineShowUp -1 : $self.trigger('scrollBegin');break;
-                    case $lis.length - lineShowUp : $self.trigger('scrollEnd');break;
+                    case lineShowUp -1 : $self.trigger('begin');break;
+                    case $lis.length - lineShowUp : $self.trigger('end');break;
                     default : $self.trigger('scrollTime',[$lis.eq(index).data('startTime')]);
                 }
 
@@ -52,7 +54,7 @@
             var  scroll = function(index){
                 if(index < lineShowUp - 1) return ;
                 else if(index > $lis.length - lineShowUp ) return ;
-                $ul.animate({scrollTop:(index  - lineShowUp + 1 ) * height},option.scrollTime,function(){
+                $ul.stop().animate({scrollTop:(index  - lineShowUp + 1 ) * height},option.scrollTime,function(){
                     cb(index,$lis.eq(index).data('time')*1000 - option.scrollTime);
                 });
             }
@@ -60,6 +62,11 @@
             scroll(lineShowUp - 1);
 
             $ul.mousewheel(function(event){
+                if(!isScroll){
+                    isScroll = true;
+                    $self.trigger('scrollBegin');
+                }
+
 
                 event.stopPropagation();
                 event.preventDefault();
@@ -71,12 +78,14 @@
 
                 }
 
-                $ul.scrollTop(top);
+                $ul.scrollTop((lineIndex - lineShowUp + 1) * height);
                 $lis.eq(lineIndex).addClass(option.classLiActive);
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(function(){
+                    $self.trigger('scrollEnd');
+                    isScroll = false;
                     scroll( lineIndex );
-                },200);
+                },500);
 
             });
             return $(this);
