@@ -8,18 +8,24 @@
 ```javascript
   $('#yourLrcDiv')
     .on('scrollTime',function(e,startTime){
-        console.log(startTime);
+        console.log('scrollTime',startTime);
     })
     .on('scrollBegin',function(){
-        console.log('begin');
+        console.log('scrollBegin');
     })
     .on('scrollEnd',function(){
+        console.log('scrollEnd');
+    })
+    .on('begin',function(){
+        console.log('begin');
+    })
+    .on('end',function(){
         console.log('end');
-    }).lrc({
+    })
+    .lrc({
     classUl:'yourClassUlCss',
     classLi:'yourClassLiCss',
     classLiActive: 'yourClassLiActiveCss',
-  
     url:'./your/ajax/address.lrc'
   });
 ```
