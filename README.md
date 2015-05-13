@@ -7,14 +7,11 @@
 
 ```javascript
   $('#yourLrcDiv')
-    .on('scrollTime',function(e,startTime){
-        console.log('scrollTime',startTime);
-    })
     .on('scrollBegin',function(){
         console.log('scrollBegin');
     })
-    .on('scrollEnd',function(){
-        console.log('scrollEnd');
+    .on('scrollEnd',function(e,time){
+        console.log('scrollEnd',time);
     })
     .on('begin',function(){
         console.log('begin');
@@ -23,13 +20,15 @@
         console.log('end');
     })
     .lrc({
-    classUl:'yourClassUlCss',
+    url:'./your/ajax/address.lrc',
+    classUl:'yourClassUlCss',  
     classLi:'yourClassLiCss',
-    classLiActive: 'yourClassLiActiveCss',
-    url:'./your/ajax/address.lrc'
+    classLiActive: 'yourClassLiActiveCss'
+  },function(handle){
+    //your code
   });
 ```
 ##更新
-
+* 2015/05/13 增加对歌词的操控方法
 * 2015/05/12 提供简单的lrc预览及事件操控 
 

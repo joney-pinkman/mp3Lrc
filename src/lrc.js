@@ -4,14 +4,6 @@
 ;(function($){
     $.fn.extend({
         lrc:function(option,cb){
-            option = $.extend({
-                classUl:'',
-                classLi:'',
-                classLiActive:'',
-
-                scrollTime:300,
-                url : ''
-            },option);
 
             if(!option.url) throw new Error('please input lyric url in your option');
             var $self = $(this);
