@@ -32,7 +32,7 @@
                     if(index < lrcInfo['content']['length'] - 1){
                         item.time = lrcInfo['content'][index+1]['startTime'] - item['startTime'];
                     }else{
-                        item.time = null;
+                        item.time = 0;
                     }
                 });
                 cb(lrcInfo);
