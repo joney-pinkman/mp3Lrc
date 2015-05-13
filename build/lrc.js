@@ -194,6 +194,8 @@
 
                 },
                 getProcess:function(){
+                    if(isScroll) return false;
+
                     if(!isPause) {
                         var now = (new Date().getTime());
                         lineProcess.current += (now - startTime)/1000;
