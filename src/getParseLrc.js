@@ -8,7 +8,8 @@
 
         'getParseLrc':function(url,cb){
 
-            $.ajax({url:url,type:'get',dataType:'text'}).done(function(content){
+            $.get(url).done(function(content){
+                //按行读取
                 var lineArr = content.match(/\[[^\r\n]+\r\n/mg);
                 if(!lineArr){
                     throw new Error('the request file is not a lyric file');
@@ -16,7 +17,7 @@
                 var lrcInfo = {content:[]},matchTmp;
 
                 lineArr.forEach(function(line){
-
+                    //歌词时间，歌词内容以及其他信息解析
                     if((matchTmp = line.match(/^\[([^0-9:]+):([^\]]+)\]/))){
                         lrcInfo[matchTmp[1]] = matchTmp[2];
                     }else if( ( matchTmp = line.match(/^\[(\d+):(\d+)\.(\d+)\]([^\r\n]+)\r\n/)) ){
@@ -27,7 +28,7 @@
                 lrcInfo['content'].sort(function(a,b){
                     return a.startTime > b.startTime ? 1 : -1;
                 });
-
+                //添加间隔时间字段
                 lrcInfo['content'].forEach(function(item,index){
                     if(index < lrcInfo['content']['length'] - 1){
                         item.time = lrcInfo['content'][index+1]['startTime'] - item['startTime'];

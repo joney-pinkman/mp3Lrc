@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .classUl{
+            list-style: none;
+            width:500px;
+            height:150px;
+            overflow: auto;
+        }
+        .classLi{
+            display: block;
+            height:22px;
+            line-height: 22px;
+            white-space: nowrap;
+        }
+        .classLiActive{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="lrc"></div>
+
+<button id="pause" type="button">pause</button>
+
+<button id="getProcess" type="button">get process</button>
+<input id="process" type="text">
+<button id="setProcess" type="button">set process</button>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+<script src="../src/constructLrc.js"></script>
+<script src="../src/getParseLrc.js"></script>
+<script src="../src/lrc.js"></script>
+<script>
+    $(function () {
+        $('#lrc')
+                .on('scrollBegin', function () {
+                    console.log('scrollBegin')
+                })
+                .on('scrollEnd', function (e,time) {
+                    console.log('scrollEnd',time);
+                })
+                .on('begin', function () {
+                    console.log('begin');
+                })
+                .on('end', function () {
+                    console.log('end');
+                }).lrc({
+                    classUl: 'classUl',
+                    classLi: 'classLi',
+                    classLiActive: 'classLiActive',
+
+                    infoBegin: 'this is a text from my option',
+                    infoEnd: 'thanks for listening',
+
+                    url: './test.lrc'
+                }, function (handle) {
+
+                    var isPause = false;
+
+                    $('#pause').click(function () {
+
+                        if (isPause) {
+                            handle.goOn();
+                            $(this).text('pause');
+                            isPause = false;
+                        } else {
+                            handle.pause();
+                            $(this).text('go on');
+                            isPause = true;
+                        }
+
+                    });
+                    $('#getProcess').click(function () {
+                        console.log(handle.getProcess());
+                    });
+                    $('#setProcess').click(function () {
+                        var process = parseInt($('#process').val());
+                        if(isNaN(process)){
+                            $('#process').val(0);
+                            process = 0;
+                        }
+                        handle.setProcess(process);
+
+                    });
+
+
+                });
+
+    });
+</script>
+</body>
+</html>
